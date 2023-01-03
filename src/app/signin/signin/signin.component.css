@@ -1,0 +1,152 @@
+
+
+.bg
+{
+    /* background: url('../images/b1.jpeg'); */
+    width: 100%;
+    height: max-content;
+    background: url('../../../assets/images/b1.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+}
+
+.glassbox
+{
+    width: 400px;
+    height:440px;
+    background-color: rgba(255, 255, 255, 0.675);
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    -webkit-backdrop-filter: blur(8px); 
+    backdrop-filter: blur(8px); 
+}
+
+.glassbox h2
+{
+    text-align: center;
+    font-family: 'poppins-b';
+    font-size: 3vw;
+    margin-top: 20px;
+    color: black;
+}
+.glassbox p
+{
+    text-align: center;
+    font-family: 'poppins-r';
+    font-size: 1.2vw;
+    margin-top:16px ;
+    margin-bottom: 16px;
+}
+.container
+{
+    width: 100%;
+    height: max-content;
+}
+
+.glassbox input[type=text],.glassbox input[type=password],.glassbox input[type=email]
+{
+    width: 100%;
+    height: 40px;
+    background-color: rgba(129, 129, 129, 0.123);
+    -webkit-backdrop-filter: blur(1px); 
+    backdrop-filter: blur(1px); 
+    border-radius: 4px;
+    color: black;
+    font-family: 'poppins-r';
+    padding: 16px;
+    margin-bottom:16px;
+    font-size: 1vw;
+    border: 0;
+}
+ ::placeholder
+{
+    color: rgba(139, 139, 139, 0.732);
+}
+.glassbox input[type=submit]
+{
+    width: 100%;
+    height: 40px;
+    background-color: rgb(102, 143, 255);
+    color: black;
+    font-family: 'poppins-s';
+    margin-bottom:16px;
+    font-size: 1vw;
+    border: 0;
+    border-radius: 4px;
+    color: white;
+}
+
+h5
+{
+    font-size: 1vw;
+    color: black;
+    margin-right: 4px;
+    font-family: 'poppins-r';
+    text-align: center;
+    margin-top: 16px;
+}
+
+h5 a
+{
+    color: rgb(102, 143, 255);
+    font-family: 'poppins-m';
+    text-decoration: none;
+}
+
+.dp
+{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    border: 0;
+    background-color: rgba(129, 129, 129, 0.123);
+    text-align: center;
+    padding: 18px;
+    position: relative;
+    left: 16px;
+    margin-bottom: 24px;
+}
+.sgb 
+{
+    height: 580px;
+}
+
+.dp i
+{
+font-size: 2.5vw;
+color:rgb(102, 143, 255) ;
+}
+.dpadd
+{
+    width: 28px;
+    height: 28px;
+    border-radius: 100px;
+    color: white;
+    border: 0;
+    padding: 0px;
+    background-color:rgb(102, 143, 255) ;
+    position: relative;
+    left: 20px;
+}
+.dpadd i
+{
+    color: white;
+    font-size: 1vw;
+
+}
+
+#errmsg
+{
+    color: rgb(237, 66, 66);
+    font-size: 1vw;
+    text-align: center;
+    text-transform: lowercase;
+    background-color: rgba(237, 66, 66, 0.129);
+    border-radius: 4px;
+    border: 1px dashed rgb(237, 66, 66);
+    padding: 10px;
+    display: none;
+
+}
