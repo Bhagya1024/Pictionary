@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase/app';
-import 'firebase/storage';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { saveAs } from 'file-saver'; // import the file-saver module
 
 
 @Component({
@@ -23,18 +20,41 @@ export class SignupComponent {
   key: string;
   name: string;
   url: string;
-  
+  imageUrl: string;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
 
+    this.imageUrl='../../assets/images/u.jpg';
+    console.log(this.imageUrl)
+  }
+
+ 
+
+  uploadImage(event: Event) {
+    const file = (event.target as HTMLInputElement).files![0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.profilePicture = file;
+      this.imageUrl = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+
+    console.log(file)
+  }
 
   search() {
     const body = {
       username: this.username,
       password: this.password,
       email: this.email,
-      profilePicture: this.profilePicture
+      imageurl:this.imageUrl
       
+    };
+
+    const imagebody = {
+      username: this.username,
+      image: this.profilePicture
+ 
     };
     const uname = {
       username: this.username
@@ -68,7 +88,7 @@ export class SignupComponent {
              errmsg.style.display='none';
              glassbox.style.height='580px';
 
-//search if there's an existing username
+             //search if there's an existing username
 
              this.http.post<User>('http://localhost:3000/api/user/search', uname).subscribe({
               next: (data) => 
@@ -97,19 +117,29 @@ export class SignupComponent {
                       
                       const msg=data.message;
                       console.log(msg)
-              
+                      
                       if(msg=='user added successfully')
                       {
-                        
-                        this.router.navigate(['/']).then(
-                          () => {
+                       
+                        // saveAs(this.profilePicture, `${this.username}.jpg`);
+                        // Use the HttpClient service to send the image to the backend
+                       this.http.post('http://localhost:3000/api/user/saveimage',{image: this.profilePicture})
+                       .subscribe(response => {
+                        console.log(response);
                            
-                          },
-                          (error) => {
-                            console.error('Error navigating to home page:', error);
-                            // handle error here
-                          }
-                        );
+                      });
+
+     
+
+                        // this.router.navigate(['/']).then(
+                        //   () => {
+                           
+                        //   },
+                        //   (error) => {
+                        //     console.error('Error navigating to home page:', error);
+                        //     // handle error here
+                        //   }
+                        // );
                         
                       }
                       else

@@ -52,15 +52,7 @@ constructor(private http: HttpClient, private router: Router) {}
         if(msg=='login successful!')
         {
           
-          this.router.navigate(['/home']).then(
-            () => {
-             
-            },
-            (error) => {
-              console.error('Error navigating to home page:', error);
-              // handle error here
-            }
-          );
+          this.router.navigate(['/home'], { queryParams: { username: this.username } });
            errmsg.style.display='none';
            glassbox.style.height='440px';
         }

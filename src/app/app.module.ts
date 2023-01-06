@@ -10,14 +10,6 @@ import { PlayComponent } from './play/play.component';
 import { RoomComponent } from './room/room.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import * as firebase from 'firebase/app';
-import 'firebase/storage';
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { firebaseConfig  } from '../environment/environment';
 
 
 @NgModule({
@@ -33,9 +25,7 @@ import { firebaseConfig  } from '../environment/environment';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    AngularFireStorageModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    HttpClientModule
     
   ],
   providers: [],

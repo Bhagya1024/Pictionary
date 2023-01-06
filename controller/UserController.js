@@ -4,6 +4,43 @@ const User=require('../model/User')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
 
+const fs = require('fs');
+const path = require('path');
+const multer = require('multer');
+const router = require('express').Router();
+
+// Configure the multer middleware to handle the image file
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../src/app/assets/userdp');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+
+const saveimage=(req,res,next)=>{
+  let username = req.body.username;
+  const file = req.file;
+  // const file=req.body.image;
+  // const filePath = path.join(__dirname, '../assets/userdp', file.originalname);
+  // const filePath = path.join(__dirname, '../src/app/assets/userdp', username);
+console.log(file)
+// console.log(filePath)
+  // fs.writeFile(filePath, file.buffer, (err) => {
+  //   if (err) {
+  //     console.error(err);
+  //     res.send({ success: false });
+  //   } else {
+  //     res.send({ success: true, imageUrl: filePath });
+  //   }
+  // });
+
+}                                                                                                         
+
 
 //add new users  - sign up
 // const adduser=(req,res,next)=>{
@@ -27,6 +64,8 @@ const jwt=require('jsonwebtoken')
 //     })
 // }
 
+
+
 //add new users
 const adduser = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedpass) {
@@ -41,7 +80,7 @@ const adduser = (req, res, next) => {
         username: req.body.username,
         email: req.body.email,
         password: hashedpass,
-        dp: req.body.dp
+        imageurl: '/assets/userdp/' + req.body.username
       });
   
       user
@@ -133,6 +172,28 @@ const search = (req, res, next) => {
         });
       });
   };
+
+  const find = (req, res, next) => {
+    let username = req.body.username;
+    User.findOne({ username: username })
+      .then(response => {
+        if (response) {
+          res.json({
+            user: response
+          });
+        } else {
+          res.json({
+            message: "User not found"
+          });
+        }
+      })
+      .catch(error => {
+        res.json({
+          message: "An error occurred"
+        });
+      });
+  };
+  
   
 
 //upgrade user from userid
@@ -181,5 +242,5 @@ const destroy=(req,res,next)=>{
 
 
 module.exports={
-    index,search,adduser,login,update,destroy
+    index,search,adduser,login,update,destroy,find,saveimage,upload
 }
