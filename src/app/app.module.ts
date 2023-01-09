@@ -10,6 +10,11 @@ import { PlayComponent } from './play/play.component';
 import { RoomComponent } from './room/room.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BoardComponent } from './board/board.component';
+import { ContainerComponent } from './container/container.component';
+import { CanvasComponent } from './canvas/canvas.component';
+import { ChatComponent } from './chat/chat.component';
+
 
 
 @NgModule({
@@ -19,13 +24,17 @@ import { HttpClientModule } from '@angular/common/http';
     SignupComponent,
     HomeComponent,
     PlayComponent,
-    RoomComponent
+    RoomComponent,
+    BoardComponent,
+    ContainerComponent,
+    CanvasComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
     
   ],
   providers: [],

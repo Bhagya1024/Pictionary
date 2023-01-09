@@ -1,0 +1,8 @@
+.draw
+{
+    border: 1px dashed rgb(196, 196, 196);
+    width: 100%;
+    height: 500px;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+}

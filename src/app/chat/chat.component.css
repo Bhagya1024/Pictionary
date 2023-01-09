@@ -1,0 +1,79 @@
+
+.chattxt
+{
+    font-family: 'poppins-r';
+    font-size: 14px;
+    margin-bottom: 12px!important;
+    width: 100%;
+    margin-left: 12px;
+    overflow-x: hidden;
+
+}
+
+ #messages{
+    font-size: 14px;
+    font-family: 'poppins-r';
+    overflow-x: hidden;
+
+} 
+.chatdrw
+{
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: white;
+    border: 1px dashed rgb(196, 196, 196);
+    border-radius: 8px;
+    padding:4px;
+    padding-top: 10px;
+}
+.chatdiv
+{
+    width: 100%;
+    background-color: transparent;
+    height: 24px;
+    margin-left: 12px;
+    margin-bottom: 4px;
+
+}
+.chatdiv .unm 
+{
+    font-size: 14px;
+    font-family: 'poppins-s';
+
+}
+.chatdiv .text
+{
+    font-size: 14px;
+    font-family: 'poppins-r';
+    margin-left: 8px;
+
+}
+.chatdiv .dot 
+{
+    margin-left: 4px;
+
+}
+.input
+{
+    width: 278px;
+    height: 40px;
+    padding: 4px;
+    border: 1px solid rgb(213, 213, 213);
+    background-color: white;
+    font-family: 'poppins-r';
+    color: black;
+    border-radius: 4px;
+    position: fixed;
+    bottom: 58px;
+    margin-left: 2px;
+    font-size: 1vw;
+}
+
+.input::placeholder
+{
+    font-family: 'poppins-r';
+    font-size: 1vw;
+    color: rgb(188, 188, 188);
+}
