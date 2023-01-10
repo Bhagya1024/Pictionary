@@ -8,6 +8,7 @@ import { BoardComponent } from './board/board.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { PlayComponent } from './play/play.component';
 import { ChatComponent } from './chat/chat.component';
+import { SelectRoomComponent } from './select-room/select-room.component';
 
 const routes: Routes = [
   {path:'',component:SigninComponent},
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path: 'board',component:BoardComponent },
   { path: 'canvas',component:CanvasComponent },
   { path: 'play',component:PlayComponent },
-  { path: 'chat',component:ChatComponent}
+  { path: 'chat',component:ChatComponent},
+  { path: 'selectroom',component:SelectRoomComponent}
+
 ];
 
 @NgModule({

@@ -77,7 +77,6 @@
         // });
 
 
-
 const express = require('express');
 const http = require('http');
 const WebSocket = require('ws');
@@ -88,6 +87,7 @@ const bodyParser=require('body-parser')
 
 const UserRoute=require('./route/UserRoute');
 const WordRoute=require('./route/WordRoute');
+const RoomRoute=require('./route/RoomRoute');
 
 // Set up the Express app and HTTP server
 const app = express();
@@ -102,6 +102,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 app.use('/api/user',UserRoute)
 app.use('/api/word',WordRoute)
+app.use('/api/room',RoomRoute)
 
 mongoose.set('strictQuery', false);
 mongoose.connect("mongodb://127.0.0.1:27017/pictionary", { useNewUrlParser: true });
@@ -167,6 +168,7 @@ wssDrawing.on('connection', (ws) => {
     // Broadcast the received data to all connected clients
     drawingClients.forEach((client) => {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
+        console.log('inside server draw'+ data)
         client.send(data);
       }
     });

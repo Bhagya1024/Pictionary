@@ -14,6 +14,7 @@ import { BoardComponent } from './board/board.component';
 import { ContainerComponent } from './container/container.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { ChatComponent } from './chat/chat.component';
+import { SelectRoomComponent } from './select-room/select-room.component';
 
 
 
@@ -28,7 +29,8 @@ import { ChatComponent } from './chat/chat.component';
     BoardComponent,
     ContainerComponent,
     CanvasComponent,
-    ChatComponent
+    ChatComponent,
+    SelectRoomComponent
   ],
   imports: [
     BrowserModule,

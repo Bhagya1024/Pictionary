@@ -87,11 +87,14 @@ export class CanvasComponent {
     this.lastX = x;
     this.lastY = y;
  
+    console.log(this.lastX)
+    console.log(this.lastY)
 
     this.ws.send(JSON.stringify({
       x: this.lastX,
       y: this.lastY,
       color: this.currentColor
+      
     }));
   }
   
