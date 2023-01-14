@@ -18,25 +18,6 @@ const addword= (req, res) => {
   };
 
 
-// Add a route to retrieve a random word from the database
-// const getword= (req, res) => {
-//     Word.count((error, count) => {
-//       if (error) {
-//         res.send(error);
-//       } else {
-//         const random = Math.floor(Math.random() * count);
-//         Word.findOne().skip(random).exec((error, result) => {
-//           if (error) {
-//             res.send(error);
-//           } else {
-//             res.send({ word: result.word });
-
-//           }
-//         });
-//       }
-//     });
-//   };
-
 
 const getwords= async (req, res) => {
   try {

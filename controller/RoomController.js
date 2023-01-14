@@ -4,20 +4,22 @@ const Room=require('../model/Room')
 
 
 //join room
-
 const joinRoom = async (req, res, next) => {
     try {
-        const roomId = req.body.roomId; // assuming that roomId is coming from the route params
-        const room = await Room.findOne({ roomId }); // filter object
+        const roomId = req.body.roomId;
+        const room = await Room.findOne({ roomId });
         if (!room) {
             return res.status(404).json({ message: "Room not found" });
         }
-
-        return res.status(200).json({ message: "Successfully joined room" });
+        else{
+            return res.status(200).json({ message: "Successfully joined room" });
+        }
     } catch (error) {
-        next(error);
+        return res.status(500).json({ message: "An error occurred" });
     }
 }
+
+
 
 
 //create room
@@ -37,6 +39,13 @@ const createRoom = async (req, res, next) => {
         const newRoom = new Room({ roomId });
         await newRoom.save();
 
+        // Create a new WebSocket server with the unique roomId
+        // const wss = new WebSocket.Server({ port: roomId });
+
+        // wss.on('connection', (ws) => {
+        //     // code to handle WebSocket connection and messages
+        // });
+
         return res.status(201).json({ message: "Room created successfully", room: newRoom });
     } catch (error) {
         next(error);
@@ -52,7 +61,18 @@ const generateRoomId = () => {
     return roomId;
 }
 
+let usersInRoom = [];
+
+const subscribeToRoomChanges = (req, res) => {
+    res.send({usersInRoom});
+}
+
+const updateUsersInRoom = (req, res) => {
+    usersInRoom = req.body.usersInRoom;
+    res.send({message: 'Users in room updated'});
+}
+
 
 module.exports={
-    joinRoom,createRoom
+    joinRoom,createRoom,subscribeToRoomChanges,updateUsersInRoom
 }

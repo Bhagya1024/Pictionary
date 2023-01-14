@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -10,14 +11,10 @@ import { Router } from '@angular/router';
 })
 
 
-
-
 export class SigninComponent {
 
   username: string;
   password: string;
-
-
 
   
 constructor(private http: HttpClient, private router: Router) {}
@@ -51,7 +48,7 @@ constructor(private http: HttpClient, private router: Router) {}
 
         if(msg=='login successful!')
         {
-          
+  
           this.router.navigate(['/home'], { queryParams: { username: this.username } });
            errmsg.style.display='none';
            glassbox.style.height='440px';
@@ -69,11 +66,6 @@ constructor(private http: HttpClient, private router: Router) {}
         console.error('Error!', error)
       }
     });
-    
-
-    
-
-   
     
     
   }

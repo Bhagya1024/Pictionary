@@ -5,7 +5,7 @@ const RoomController=require('../controller/RoomController')
 
 router.post('/joinroom',RoomController.joinRoom);
 router.post('/createroom',RoomController.createRoom);
-
-
+router.get('/subscribeToRoomChanges',RoomController.subscribeToRoomChanges);
+router.post('/updateUsersInRoom',RoomController.updateUsersInRoom);
 
 module.exports=router

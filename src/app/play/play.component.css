@@ -102,8 +102,8 @@
 {
     padding: 8px;
     background-color: rgb(255, 255, 255);
-    width: 300px;
-    height: 60px;
+    width: 100%;
+    height: 64px;
     border:1px dashed rgb(196, 196, 196);
     border-radius: 8px;
     margin-bottom: 8px;
@@ -138,7 +138,7 @@
     background-repeat: no-repeat;
     background-size: cover; 
     margin: auto;
-    margin-top: 2px;
+    margin-top: 4px;
     margin-left: 40px;
     
 }
@@ -219,4 +219,44 @@
     font-family: 'poppins-r';
     font-size: 1vw;
     color: rgb(188, 188, 188);
+}
+
+.leavebtn
+{
+    width: 300px;
+    height: 40px;
+    background-color: rgb(196, 60, 60);
+    border-radius: 4px;
+    color: white;
+    font-family: 'poppins-m';
+    font-size: 1vw;
+    position: fixed;
+    bottom: 60px;
+    border: 0;
+    margin-left: -10px;
+}
+
+.wait
+{
+    width: 100%;
+    height: 60px;
+    background-color: rgba(85, 60, 196, 0.199);
+    border:1px solid rgb(85, 60, 196);
+    border-radius: 4px;
+    color: rgb(85, 60, 196);
+    font-family: 'poppins-r';
+    font-size: 1vw;
+    position: relative;
+    padding: 16px;
+    margin-left: -10px;
+    text-align: center;
+    display: none;
+
+
+}
+
+#round
+{
+    margin-left: 4px;
+    margin-right: 4px;
 }

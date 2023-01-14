@@ -10,7 +10,7 @@
       </div>
     <div class="col-9">
         <h4>Guess the word</h4>
-        <h5 class="word" id="wordhidden" #wordhidden></h5>
+        <h5 class="word" id="wordhidden" #wordhidden> </h5>
     </div>
    </div> 
     
@@ -19,25 +19,34 @@
 <div class="container bottom">
     <div class="row">
     <div class="col-3">
-        <div class="rank">
+
+        <p class="wait" id="wait">waiting for other players to start</p>
+    
+        <div class="rank" *ngFor="let user of connectedUsers">
             <div class="row">
                 <div class="col-2 rankno">
-                    1
+                    #1
                 </div>
                 <div class="col-4 us">
-                    <h4 class="uname">Bhagya1024</h4>
-                    <h5 class="score">450 pt</h5>
+                    <h4 class="uname">{{user.username}}</h4>
+                    <h5 class="score">{{user.points}} pt</h5>
                 </div>
                 <div class="col-4">
                     <div class="userdp"></div>
                 </div>
             </div>
         </div>
+
+        <button class="leavebtn" id="leavebtn" (click)="leaveroom()">Leave Room</button>
+
         
     </div>
 
     <div class="col-6">
-        <app-canvas></app-canvas>
+        
+        <app-canvas>
+           
+        </app-canvas>
         
     </div>
 

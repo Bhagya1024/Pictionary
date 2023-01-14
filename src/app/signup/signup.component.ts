@@ -131,15 +131,15 @@ export class SignupComponent {
 
      
 
-                        // this.router.navigate(['/']).then(
-                        //   () => {
+                        this.router.navigate(['/']).then(
+                          () => {
                            
-                        //   },
-                        //   (error) => {
-                        //     console.error('Error navigating to home page:', error);
-                        //     // handle error here
-                        //   }
-                        // );
+                          },
+                          (error) => {
+                            console.error('Error navigating to home page:', error);
+                            // handle error here
+                          }
+                        );
                         
                       }
                       else

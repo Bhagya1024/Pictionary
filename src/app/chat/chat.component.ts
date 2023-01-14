@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ChatComponent {
 
   username: string | undefined;
+  roomId: string;
 
   constructor(private route: ActivatedRoute) {}
   
@@ -17,9 +18,11 @@ export class ChatComponent {
 
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
+      this.roomId=params['roomId'];
       // Do something with the username
-      console.log(this.username)
+      console.log(this.roomId)
     });
+    
 
     const messages = document.querySelector('#messages') as HTMLElement;
     const messageBox = document.querySelector('#messageBox') as HTMLInputElement;
@@ -28,30 +31,36 @@ export class ChatComponent {
 
     const uname=this.username
 
-    function showMessage(data: any) {
+    const showMessage = (data: any) => {
       let message: string = 'unknown message';
       let sender: string = 'unknown';
+      let room: string = 'unknown';
       if (typeof data === 'string') {
         const parsedData = JSON.parse(data);
         sender = parsedData.uname;
         message = parsedData.message;
+        room = parsedData.room;
       } else {
         const reader = new FileReader();
         reader.onload = () => {
           const parsedData = JSON.parse(reader.result as string);
           sender = parsedData.uname;
           message = parsedData.message;
+          room = parsedData.room;
         };
         reader.readAsText(data);
       }
-      messages.innerHTML += `\n<span class="chattxt" style="font-family: 'poppins-r';
-      font-size: 14px;
-      width: 100%;
-      margin-left: 12px;
-      overflow-x: hidden;"> <span class="uname" style="font-family: 'poppins-s';">${sender}</span><span style="margin-right: 8px;">:</span> ${message}</span>\n`;
-      messages.scrollTop = messages.scrollHeight;
-      messageBox.value = '';
+      if (room === this.roomId) {
+        messages.innerHTML += `\n<span class="chattxt" style="font-family: 'poppins-r';
+        font-size: 14px;
+        width: 100%;
+        margin-left: 12px;
+        overflow-x: hidden;"> <span class="uname" style="font-family: 'poppins-s';">${sender}</span><span style="margin-right: 8px;">:</span> ${message}</span>\n`;
+        messages.scrollTop = messages.scrollHeight;
+        messageBox.value = '';
+      }
     }
+
     
     function init() {
       if (ws) {
@@ -78,11 +87,12 @@ export class ChatComponent {
       }
     }
 
-    messageBox.addEventListener('keydown', (event) => {
+  messageBox.addEventListener('keydown', (event) => {
       if (event.key === 'Enter' && ws) {
         const messageObject = {
           uname: uname,
-          message: messageBox.value
+          message: messageBox.value,
+          room: this.roomId
         };
         ws.send(JSON.stringify(messageObject));
         showMessage(JSON.stringify(messageObject));
