@@ -11,27 +11,7 @@
 }
 
 
-/* .userdp
-{
-   
-    margin: auto;
-    border-radius: 500px;
-    width:80px;
-    height: 80px;
-    background-image: url('../images/f4.png');
-    background-repeat: no-repeat;
-    background-size: cover; 
-}
 
-.username
-{
-    font-family: 'poppins-m';
-    font-size: 1vw;
-    margin-bottom: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-} */
 .userrow
 {
     margin: auto;
@@ -44,18 +24,37 @@
     -webkit-backdrop-filter: blur(8px); 
     backdrop-filter: blur(8px); 
 }
-.userdp
+.divinput{
+    width: 100%;
+    height: 200px;
+    margin: auto;
+}
+.privateinput
 {
-   
-    border-radius: 500px;
-    width:30px;
-    height: 30px;
-    background-image: url('../../../src/assets/images/dp.jpg');
-    background-repeat: no-repeat;
-    background-size: cover; 
-    
+    width: 90%;
+    height: 45px;
+    border-radius: 8px 0px 0px 8px;
+    border: 1px solid rgb(212, 212, 212);
+    background-color: rgba(242, 242, 242, 0.53);
+    font-family: 'poppins-r';
+    padding: 20px;
 }
 
+.privateinput::placeholder{
+    color: rgb(149, 149, 149);
+    font-family: 'poppins-r';
+    font-size: 16px;
+}
+.joinprivatebtn
+{
+    width: 10%;
+    height: 45px;
+    border-radius:0px 8px 8px 0px; 
+    border: 1px solid rgb(102, 143, 255);
+    background-color:rgb(102, 143, 255) ;
+    color: white;
+
+}
 .username
 {
     font-family: 'poppins-m';
@@ -66,7 +65,6 @@
     letter-spacing: 2px;
     position: relative;
     top: 10px;
-    margin-left: 20px;
     color: rgb(255, 255, 255);
     /* color: rgb(102, 143, 255); */
 
@@ -146,7 +144,7 @@ a
 .c1
 {
     position: relative;
-    top: 25vh;
+    top: 15vh;
     left: -2vh;
 }
 
@@ -158,3 +156,17 @@ a
     transition: all .4s ease-in-out;  
 }
 
+.invalid
+{
+    color: rgb(237, 66, 66);
+    font-size: 16px;
+    text-align: center;
+    text-transform: lowercase;
+    font-family: 'poppins-r';
+    background-color: rgba(237, 66, 66, 0.129);
+    border-radius: 4px;
+    border: 1px dashed rgb(237, 66, 66);
+    padding: 10px;
+    display: none;
+
+}

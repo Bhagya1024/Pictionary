@@ -12,10 +12,8 @@ const userSchema=new Schema({
     },
     password:{
         type:String
-    },
-    imageurl:{
-        type:String
     }
+
 },{timestamps:true})
 
 const User=mongoose.model('User',userSchema)

@@ -16,44 +16,28 @@ export class SignupComponent {
   username: string;
   password: string;
   email:string;
-  profilePicture: File;
-  key: string;
+
   name: string;
-  url: string;
-  imageUrl: string;
+
 
   constructor(private http: HttpClient, private router: Router) {
 
-    this.imageUrl='../../assets/images/u.jpg';
-    console.log(this.imageUrl)
   }
 
  
 
-  uploadImage(event: Event) {
-    const file = (event.target as HTMLInputElement).files![0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.profilePicture = file;
-      this.imageUrl = reader.result as string;
-    };
-    reader.readAsDataURL(file);
 
-    console.log(file)
-  }
 
   search() {
     const body = {
       username: this.username,
       password: this.password,
-      email: this.email,
-      imageurl:this.imageUrl
+      email: this.email
       
     };
 
     const imagebody = {
-      username: this.username,
-      image: this.profilePicture
+      username: this.username
  
     };
     const uname = {
@@ -75,7 +59,6 @@ export class SignupComponent {
     console.log(this.username)
     console.log(this.password)
     console.log(this.email)
-    console.log(this.profilePicture)
 
     if(this.username==null || this.password==null || this.email==null)
     {
@@ -120,17 +103,8 @@ export class SignupComponent {
                       
                       if(msg=='user added successfully')
                       {
-                       
-                        // saveAs(this.profilePicture, `${this.username}.jpg`);
-                        // Use the HttpClient service to send the image to the backend
-                       this.http.post('http://localhost:3000/api/user/saveimage',{image: this.profilePicture})
-                       .subscribe(response => {
-                        console.log(response);
-                           
-                      });
 
-     
-
+    
                         this.router.navigate(['/']).then(
                           () => {
                            

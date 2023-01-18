@@ -14,6 +14,12 @@ const userRoomSchema=new Schema({
     },
     points:{
         type:Number
+    },
+    guessed:{
+        type:Number
+    },
+    round:{
+        type:Number
     }
 },{timestamps:true})
 

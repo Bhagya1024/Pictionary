@@ -7,7 +7,7 @@ const Room=require('../model/Room')
 const joinRoom = async (req, res, next) => {
     try {
         const roomId = req.body.roomId;
-        const room = await Room.findOne({ roomId });
+        const room = await Room.findOne({ roomId:roomId });
         if (!room) {
             return res.status(404).json({ message: "Room not found" });
         }
@@ -36,17 +36,11 @@ const createRoom = async (req, res, next) => {
         }
 
         // Create the new room with the unique room ID
-        const newRoom = new Room({ roomId });
+        const newRoom = new Room({ roomId, username:req.body.username,private: 1 });
         await newRoom.save();
 
-        // Create a new WebSocket server with the unique roomId
-        // const wss = new WebSocket.Server({ port: roomId });
 
-        // wss.on('connection', (ws) => {
-        //     // code to handle WebSocket connection and messages
-        // });
-
-        return res.status(201).json({ message: "Room created successfully", room: newRoom });
+        return res.status(201).json({ message: "Room created successfully", roomId: roomId });
     } catch (error) {
         next(error);
     }
@@ -73,6 +67,24 @@ const updateUsersInRoom = (req, res) => {
 }
 
 
+const joinprivate = async (req, res, next) => {
+    try {
+        const roomId = req.body.roomId;
+
+        // Check if the room ID already exists
+        let room = await Room.findOne({ roomId:roomId });
+
+        if (room) {
+            return res.send({ message: "Room found" });
+        } else {
+            return res.send({ message: "Invalid Room ID" });
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+
 module.exports={
-    joinRoom,createRoom,subscribeToRoomChanges,updateUsersInRoom
+    joinRoom,createRoom,subscribeToRoomChanges,updateUsersInRoom,joinprivate
 }

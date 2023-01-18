@@ -20,6 +20,24 @@ const gameSchema=new Schema({
     },
     words:{
         type:[String]
+    },
+    roundUser:{
+        type:String
+    },
+    time:{
+        type:Number
+    },
+    sound:{
+        type:Number
+    },
+    firstPlace:{
+        type:String
+    },
+    secondPlace:{
+        type:String
+    },
+    thirdPlace:{
+        type:String
     }
     
 },{timestamps:true})

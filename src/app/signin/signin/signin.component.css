@@ -147,6 +147,7 @@ color:rgb(102, 143, 255) ;
     border-radius: 4px;
     border: 1px dashed rgb(237, 66, 66);
     padding: 10px;
+    font-family: 'poppins-r';
     display: none;
 
 }

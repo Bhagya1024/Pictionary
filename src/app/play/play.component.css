@@ -33,6 +33,7 @@
     border: 1px solid rgb(0, 0, 0);
     margin: auto;
     padding: 16px;
+    transition: all .4s ease-in-out;
 }
 
 .wordbox h4
@@ -117,15 +118,24 @@
     color: rgb(0, 0, 0);
     text-transform: capitalize;
     text-align: left;
+    margin-top: 12px;
     
 }
 .score
 {
     font-family: 'poppins-r';
     font-size: 1vw;
-    color: rgb(0, 0, 0);
+    color: rgb(85, 60, 196);
     text-transform: capitalize;
-    text-align: left;
+    text-align: center;
+    margin-top: 6px;
+    background-color: rgba(85, 60, 196, 0.151);
+    border:1px solid rgba(85, 60, 196, 0.233);
+    padding-top:6px;
+    padding-bottom: 6px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-radius: 20px;
 }
 
 .userdp
@@ -251,6 +261,7 @@
     margin-left: -10px;
     text-align: center;
     display: none;
+ 
 
 
 }
@@ -259,4 +270,152 @@
 {
     margin-left: 4px;
     margin-right: 4px;
+}
+
+.round-user{
+    border:1px dashed rgb(85, 60, 196);
+    background-color:rgb(248, 246, 255);
+    
+}
+
+.roundend
+{
+    background-color: rgb(0, 0, 0);
+}
+
+.bigdiv
+{
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    border: 1px dashed rgb(196, 196, 196);
+    border-radius: 8px;
+    display: none;
+}
+.in
+{
+    width: 100%;
+    height: 500px;
+
+}
+.winnerimg
+{
+    width: 80%;
+    height:200px;
+    background-image: url('../../assets/images/winners.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   margin: auto;
+   position: relative;
+   top: 80px;
+}
+
+.incontainer
+{
+    margin-top: 80px;
+}
+
+.place
+{
+font-family: 'poppins-m';
+font-size: 16px;
+color: black;
+margin-top: -20px;
+text-align: center;
+text-transform: lowercase;
+}
+#first
+{
+    margin-top: 20px;
+}
+.placeimg
+{
+    width: 120px;
+    height: 170px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
+    margin-top: 0px;
+    margin-left: 26px;
+}
+.placeh 
+{
+    background-color: rgba(85, 60, 196, 0);
+    color: rgb(82, 82, 82);
+    font-family: 'poppins-r';
+    font-size: 16px;
+    text-align: center;
+    text-transform: lowercase;
+    border-radius: 4px;
+    margin-top: 100px;
+}
+
+.sec
+{
+background-image: url('../../assets/images/second.jpeg');
+}
+ .fir
+{
+    background-image: url('../../assets/images/first.jpeg');
+    width: 140px;
+    height: 190px;
+    margin-top: 20px;
+}
+.thi
+{
+    background-image: url('../../assets/images/third.jpeg');
+}
+
+#first
+{
+    font-size: 24px;
+    color: rgb(255, 169, 10);
+    font-family: 'poppins-s';
+}
+
+.placepoints 
+{
+    
+    background-color: rgba(85, 60, 196, 0);
+    color: rgb(82, 82, 82);
+    font-family: 'poppins-r';
+    font-size: 16px;
+    text-align: center;
+    text-transform: lowercase;
+    margin-top: -40px;
+}
+
+#firstpoints
+{
+    margin-top: 0;
+    font-family: 'poppins-m';
+    color: rgb(0, 0, 0);
+}
+
+.roomid
+{
+    width: 180px;
+    height: 40px;
+    background-color: rgba(85, 60, 196, 0.205);
+    border: 1px solid rgb(85, 60, 196);
+    color: rgb(85, 60, 196);;
+    font-family: 'poppins-m';
+    font-size: 16px;
+    text-transform: lowercase;
+    padding: 8px;
+    position: fixed;
+    top: 40px;
+    right: 80px;
+    border-radius: 4px;
+    display: none;
+
+}
+.inroom
+{
+    padding-left: 30px;
+}
+
+.fa-copy
+{
+    margin-left: 18px;
 }

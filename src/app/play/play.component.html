@@ -1,6 +1,9 @@
 <div class="bg">
 <h1 class="heading">Pictionary</h1>
-<div class="container wordbox">
+<div class="roomid" id="roomiddiv" [attr.data-clipboard-text]="roomId">
+    <span class="inroom" id="rid" ></span><i class="fa-regular fa-copy"></i>
+</div>
+<div class="container wordbox" id="wordbox">
    <div class="row">
     <div class="col-1">
       <span class="time"><span><i class="fa-regular fa-hourglass"></i></span><span id="time"> </span><span> s</span> </span> 
@@ -9,7 +12,7 @@
         <span class="round"><i class="fa-regular fa-circle-play"></i> <span id="round"></span><span>of 10</span> </span> 
       </div>
     <div class="col-9">
-        <h4>Guess the word</h4>
+        <h4 id="wordheading">Guess the word</h4>
         <h5 class="word" id="wordhidden" #wordhidden> </h5>
     </div>
    </div> 
@@ -22,17 +25,17 @@
 
         <p class="wait" id="wait">waiting for other players to start</p>
     
-        <div class="rank" *ngFor="let user of connectedUsers">
+        <div class="rank" *ngFor="let user of connectedUsers"  [id]="'user-'+user.username">
             <div class="row">
                 <div class="col-2 rankno">
-                    #1
+                    # {{user.rank}}
                 </div>
                 <div class="col-4 us">
                     <h4 class="uname">{{user.username}}</h4>
-                    <h5 class="score">{{user.points}} pt</h5>
+                    
                 </div>
                 <div class="col-4">
-                    <div class="userdp"></div>
+                    <h5 class="score">{{user.points}} pt</h5>
                 </div>
             </div>
         </div>
@@ -43,15 +46,70 @@
     </div>
 
     <div class="col-6">
+        <div class="bigdiv" id="bigdiv">
+            <div class="container ">
+
+                <div class="row">
+                    <div class="col-4">
+                        <h4  class="placeh">2<sup>nd </sup>Place</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 class="placeh">1<sup>st</sup> Place</h4>
+                    </div>
+                    <div class="col-4">
+                        <h4  class="placeh">3<sup>rd</sup> Place</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4">
+                        <div  class="placeimg sec"></div>
+                    </div>
+                    <div class="col-4">
+                        <div  class="placeimg fir"></div>
+                    </div>
+                    <div class="col-4">
+                        <div  class="placeimg thi"></div>
+                    </div>
+                </div>
+             
+            
+                <div class="row">
+                    <div class="col-4">
+                        <h4 id="second" class="place"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="first" class="place"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="third" class="place"></h4>
+                    </div>
+                </div>
+
+                
+                <div class="row">
+                    <div class="col-4">
+                        <h4 id="secondpoints" class="placepoints"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="firstpoints" class="placepoints"></h4>
+                    </div>
+                    <div class="col-4">
+                        <h4 id="thirdpoints" class="placepoints"></h4>
+                    </div>
+                </div>
+            
+        </div>
+        </div>
         
-        <app-canvas>
+        <app-canvas id="canvasapp">
            
         </app-canvas>
         
     </div>
 
     <div class="col-3" id="chatcontainer">
-        <app-chat></app-chat>
+        <app-chat  [word]="word" [round]="round"></app-chat>
         <!-- <div class="chatdrw">
             <div class="chatdiv">
                 <span class="unm">Bhagya132<span class="dot">:</span></span>

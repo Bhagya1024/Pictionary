@@ -10,7 +10,6 @@ router.post('/login',UserController.login);
 router.post('/update',UserController.update);
 router.post('/delete',UserController.destroy);
 router.post('/find',UserController.find);
-router.post('/saveimage', UserController.upload.single('image'), UserController.saveimage);
 
 
 module.exports=router

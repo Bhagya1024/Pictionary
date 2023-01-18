@@ -10,7 +10,10 @@ const roomSchema=new Schema({
     },
     username:{
         type:String
-    }
+    },
+    private:{
+        type:Number
+    },
 },{timestamps:true})
 
 const Room=mongoose.model('Room',roomSchema)

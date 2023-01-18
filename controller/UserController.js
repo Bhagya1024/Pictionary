@@ -9,60 +9,6 @@ const path = require('path');
 const multer = require('multer');
 const router = require('express').Router();
 
-// Configure the multer middleware to handle the image file
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../src/app/assets/userdp');
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  }
-});
-
-const upload = multer({ storage: storage });
-
-
-const saveimage=(req,res,next)=>{
-  let username = req.body.username;
-  const file = req.file;
-  // const file=req.body.image;
-  // const filePath = path.join(__dirname, '../assets/userdp', file.originalname);
-  // const filePath = path.join(__dirname, '../src/app/assets/userdp', username);
-console.log(file)
-// console.log(filePath)
-  // fs.writeFile(filePath, file.buffer, (err) => {
-  //   if (err) {
-  //     console.error(err);
-  //     res.send({ success: false });
-  //   } else {
-  //     res.send({ success: true, imageUrl: filePath });
-  //   }
-  // });
-
-}                                                                                                         
-
-
-//add new users  - sign up
-// const adduser=(req,res,next)=>{
-//     let user = new User({
-//         username: req.body.username,
-//         email: req.body.email,
-//         password: req.body.password,
-//         dp: req.body.dp
-//       })
-      
-//     user.save()
-//     .then(response=> {
-//         res.json({
-//             message:'user added successfully'
-//         })
-//     })
-//     .catch(error=>{
-//         res.json({
-//             message:'An error occured'
-//         })
-//     })
-// }
 
 
 
@@ -79,8 +25,8 @@ const adduser = (req, res, next) => {
       let user = new User({
         username: req.body.username,
         email: req.body.email,
-        password: hashedpass,
-        imageurl: '/assets/userdp/' + req.body.username
+        password: hashedpass
+        
       });
   
       user
@@ -204,8 +150,7 @@ const update=(req,res,next)=>{
     let updatedData={
         username:req.body.username,
         email:req.body.email,
-        password:req.body.password,
-        dp:req.body.dp
+        password:req.body.password
     }
 
     User.findByIdAndUpdate(userID,{$set:updatedData})
@@ -242,5 +187,5 @@ const destroy=(req,res,next)=>{
 
 
 module.exports={
-    index,search,adduser,login,update,destroy,find,saveimage,upload
+    index,search,adduser,login,update,destroy,find
 }
