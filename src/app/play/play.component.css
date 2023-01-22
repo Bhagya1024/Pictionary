@@ -419,3 +419,8 @@ background-image: url('../../assets/images/second.jpeg');
 {
     margin-left: 18px;
 }
+/* #canvasapp
+{
+    cursor: not-allowed;
+    pointer-events: none;
+} */

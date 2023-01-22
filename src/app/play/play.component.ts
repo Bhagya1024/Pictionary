@@ -547,9 +547,7 @@ this.http.post('http://localhost:3000/api/game/updateroundend', { roomId: this.r
 });
 
 
-  //   this.http.post('http://localhost:3000/api/game/updateroundend', {roomId:this.roomId}).subscribe(data => {
-
-  // });
+ 
 
     this.http.post('http://localhost:3000/api/userroom/getrank',{roomId:this.roomId}).subscribe(data => {
 

@@ -1,8 +1,16 @@
-.draw
+/* .draw
 {
     border: 1px dashed rgb(196, 196, 196);
     width: 100%;
     height: 500px;
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
-}
+} */
+.canvas-border {
+    border: 1px dashed rgb(196, 196, 196);
+    color: red !important;
+    width: 100%;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 8px;
+  }

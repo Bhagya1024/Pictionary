@@ -13,7 +13,6 @@ const WordRoute=require('./route/WordRoute');
 const RoomRoute=require('./route/RoomRoute');
 const UserRoomRoute=require('./route/UserRoomRoute');
 const GameRoute=require('./route/GameRoute');
-
 // Set up the Express app and HTTP server
 const app = express();
 const server = http.createServer(app);
@@ -33,7 +32,7 @@ app.use('/api/userroom',UserRoomRoute)
 app.use('/api/game',GameRoute)
 
 mongoose.set('strictQuery', false);
-mongoose.connect("mongodb://127.0.0.1:27017/pictionary", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://pictionary:mongopic1234@cluster0.t9adv99.mongodb.net/pictionary?retryWrites=true&w=majority", { useNewUrlParser: true });
 const db=mongoose.connection
 
 db.on('error',(err)=>{
@@ -52,8 +51,6 @@ db.once('open',()=>{
 
 const wssChat = new WebSocket.Server({ server });
 
-
-const wssDrawing = new WebSocket.Server({ port: 8080 });
 
 let chatClients = [];
 
@@ -80,34 +77,7 @@ wssChat.on('connection', (ws, req) => {
   });
 });
 
-
-
-// wssDrawing.on('connection', (ws) => {
-//   let roomId = req.url.slice(1);
-//   console.log('New connection established - drawing');
-//   ws.roomId = roomId;
-
-//   drawingClients.push(ws);
-
-
-//     // Listen for messages from the client
-//     ws.on('message', (data) => {
-//       // Broadcast the received data to all connected clients in the same room
-//       drawingClients.forEach((client) => {
-//           if (client !== ws && client.readyState === WebSocket.OPEN && client.roomId === ws.roomId) {
-//               console.log('inside server draw' + data);
-//               client.send(data);
-//           }
-//       });
-//   });
-
-
-//   ws.on('close', () => {
-//     drawingClients = drawingClients.filter((client) => client !== ws);
-//   });
-// });
-
-
+const wssDrawing = new WebSocket.Server({ port: 8080 });
 
 
 server.listen(6969, () => {

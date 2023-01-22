@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener,ViewChild, ElementRef,Renderer2,AfterViewInit  } from '@angular/core';
+import { WebsocketService } from '../websocket.service';
 
 
 
@@ -8,94 +9,196 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./canvas.component.css']
 })
 export class CanvasComponent {
-  private canvas: HTMLCanvasElement;
-  private context: CanvasRenderingContext2D;
+  @ViewChild('canvas', { static: true }) canvas?: ElementRef;
+  private ctx?: CanvasRenderingContext2D;
   private isDrawing = false;
   private lastX = 0;
   private lastY = 0;
-  private currentColor = '#000000';
-  private ws: WebSocket;
+  color = 'red';
+  items =Array.from(Array(10).keys());
+  private clientID="";
+  private GameID="";
+  private playerColor="";
+  private game=null;
+  backgroundColor: string = 'white';
 
-  constructor() {
-    
-  }
+ constructor(private wsService: WebsocketService,private renderer: Renderer2, private el: ElementRef) {
+    this.items=Array.from(Array(0).keys());
+    this.wsService.receive().subscribe(message => {
+      if(message.method=="connect"){
 
-  ngOnInit() {
-    this.canvas = document.getElementById('canvas') as HTMLCanvasElement;
-    const ctx = this.canvas.getContext('2d');
-    if(ctx) {
-      this.context = ctx;
-    }
+        this.clientID=message.clientId;
+        console.log("Connected");
+        console.log(message.clientId);
+        this.join();
+      };
+      // if(message.method=="create"){
+      //   this.GameID=message.game.id;
+      //   console.log("New Game Created");       
+      //   console.log(message.game);
+        
+      // };
+      if(message.method=="join"){
+        this.GameID=message.game.id;
+        this.game=message.game.clients;
+        console.log("You joined Successfully");
+        console.log(message.game);
+        message.game.clients.forEach((num: any) => {
+          console.log(this.clientID);
 
-    this.ws = new WebSocket('ws://localhost:8080');
-    this.ws.onopen = () => {
-      console.log('Connection opened! - drawing');
-    };
-  }
+          if(num.clientId==this.clientID){
+            this.items =Array.from(Array(message.game.balls).keys());
+            console.log(num);
+            this.playerColor=num.color
+            console.log(this.playerColor);
+           // this.backgroundColor=this.playerColor;
+          }
+        });
 
- 
-  // Set up mouse events for drawing
-  @HostListener('mousedown', ['$event']) onMouseDown(event: MouseEvent) {
-    this.isDrawing = true;
-    this.lastX = event.offsetX;
-    this.lastY = event.offsetY;
-    this.draw(event.offsetX, event.offsetY);
+      };
+      if(message.method=="update"){
+        console.log(message);
+        console.log("Game state updated");
+        if (!message.game.state) return;
+        let x=message.game.stateX;
+        let y=message.game.stateY;
+        if(message.game.mState=="start"){
+          this.startDrawing(x,y);
+        }
+        if(message.game.mState=="draw"){
+          this.draw(x,y);
+        }
+        if(message.game.mState=="end"){
+          this.stopDrawing();
+        }
+        
+        Object.entries(message.game.state).forEach(([key, value]) => {
+          console.log(`${key}: ${value}`);
+          
+          
+        });
+
+
+      };
+    });
   }
   
+  ngAfterViewInit() {
+    if(this.canvas) {
+      this.ctx = this.canvas.nativeElement.getContext('2d');
+      this.canvas.nativeElement.width = this.canvas.nativeElement.offsetWidth;
+      this.canvas.nativeElement.height = this.canvas.nativeElement.offsetHeight;
+      
+  }
+  }
 
-  @HostListener('mouseup', ['$event']) onMouseUp(event: MouseEvent) {
+  startDrawing(lastX: number,lastY: number) {
+    if(this.canvas) {
+    const rect = this.canvas.nativeElement.getBoundingClientRect();
+    }
+    this.isDrawing = true;
+    this.lastX = lastX;
+    this.lastY = lastY;
+        // this.join();
+    console.log("start drawing");
+  }
+
+  draw(clientX: number,clientY: number) {
+   
+    if (!this.isDrawing) {
+      return;
+    }
+    if(this.ctx){
+      console.log(" drawing");
+      this.ctx.strokeStyle = this.color;
+      this.ctx.fillStyle=this.color;
+      this.ctx.lineWidth = 13;
+      this.ctx.beginPath();  
+      console.log(this.lastX+","+this.lastY);
+      this.ctx.moveTo(this.lastX-300, this.lastY);
+      this.ctx.lineTo(clientX-300, clientY);
+      this.ctx.stroke();
+    }
+    this.lastX = clientX;
+    this.lastY = clientY;
+  }
+
+  stopDrawing() {
+    console.log("stop drawing");
     this.isDrawing = false;
   }
 
-  @HostListener('mousemove', ['$event']) onMouseMove(event: MouseEvent) {
-    if (this.isDrawing) {
-      this.draw(event.offsetX, event.offsetY);
-      this.lastX = event.offsetX;
-      this.lastY = event.offsetY;
-    }
+ //Mouse event
+  mouseDown(event: MouseEvent){
+    //this.startDrawing(event.clientX,event.clientY);
+    this.startdrawingValuesSend(event.clientX,event.clientY);
+    console.log('mouse down');
   }
-  
+  mouseUp(){
+    //this.stopDrawing();
+    this.enddrawingValuesSend();
+    console.log('mouse up');
+  }
 
-  // // Set up touch events for drawing on mobile devices
-  // @HostListener('touchstart', ['$event']) onTouchStart(event: TouchEvent) {
-  //   const touch = event.touches[0];
-  //   this.isDrawing = true;
-  //   this.lastX = touch.clientX - this.canvas.offsetLeft;
-  //   this.lastY = touch.clientY - this.canvas.offsetTop;
-  // }
+  mouseMove(event: MouseEvent){
+    //this.draw(event.clientX,event.clientY)
+    this.drawingValuesSend(event.clientX,event.clientY);
+    console.log('mouse move');
+  }
 
-  // @HostListener('touchend', ['$event']) onTouchEnd(event: TouchEvent) {
-  //   this.isDrawing = false;
-  // }
+  join() {
 
-  // @HostListener('touchmove', ['$event']) onTouchMove(event: TouchEvent) {
-  //   const touch = event.touches[0];
-  //   if (this.isDrawing) {
-  //     const rect = this.canvas.getBoundingClientRect();
-  //     this.draw(touch.clientX - rect.left, touch.clientY - rect.top);
-  //   }
-  // }
-  
+    const payLoad = {
+      method: 'join',
+      clientId: this.clientID,
+      gameId:'230120A001',
+    };
+    this.wsService.send(payLoad);
+  }
 
-  public draw(x: number, y: number) {
-    this.context.strokeStyle = this.currentColor;
-    this.context.lineWidth = 3;
-    this.context.beginPath();
-    this.context.moveTo(this.lastX, this.lastY);
-    this.context.lineTo(x, y);
-    this.context.stroke();
-    this.lastX = x;
-    this.lastY = y;
- 
-    console.log(this.lastX)
-    console.log(this.lastY)
+  startdrawingValuesSend(clientX: number,clientY: number) {
 
-    this.ws.send(JSON.stringify({
-      x: this.lastX,
-      y: this.lastY,
-      color: this.currentColor
-      
-    }));
+    const payLoad = {
+      method: 'play',
+      clientId: this.clientID,
+      gameId:'230120A001',
+      ballId:1,
+      clientX:clientX,
+      clientY:clientY,
+      color:this.playerColor,
+      mstate:"start"
+    };
+    this.wsService.send(payLoad);
+  }
+
+  drawingValuesSend(clientX: number,clientY: number) {
+
+    const payLoad = {
+      method: 'play',
+      clientId: this.clientID,
+      gameId:'230120A001',
+      ballId:1,
+      clientX:clientX,
+      clientY:clientY,
+      color:this.playerColor,
+      mstate:"draw"
+    };
+    this.wsService.send(payLoad);
+  }
+
+  enddrawingValuesSend() {
+
+    const payLoad = {
+      method: 'play',
+      clientId: this.clientID,
+      gameId:'230120A001',
+      ballId:1,
+      clientX:0,
+      clientY:0,
+      color:this.playerColor,
+      mstate:"end"
+    };
+    this.wsService.send(payLoad);
   }
   
 
