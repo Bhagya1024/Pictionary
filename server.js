@@ -77,7 +77,7 @@ wssChat.on('connection', (ws, req) => {
   });
 });
 
-const wssDrawing = new WebSocket.Server({ port: 8080 });
+
 
 
 server.listen(6969, () => {

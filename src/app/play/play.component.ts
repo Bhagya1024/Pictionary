@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
-
+import { CanvasComponent } from '../canvas/canvas.component';
 
 interface GameData {
   message: string;
@@ -37,7 +37,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
   round:Number;
   private:Number;
   
-  constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute) {}
+  constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute,private canvasComponent:CanvasComponent) {}
 
   
 
@@ -45,7 +45,6 @@ export class PlayComponent implements OnInit, AfterViewInit {
 
    const roomdiv=document.getElementById('roomiddiv') as HTMLElement;
    const rid=document.getElementById('rid') as HTMLElement;
-
 
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
@@ -182,6 +181,7 @@ gamestart() {
   const wordheading=document.getElementById('wordheading') as HTMLElement;
   const canvasapp=document.getElementById("canvasapp")as HTMLElement;
   const bigdiv=document.getElementById("bigdiv")as HTMLElement;
+  var c = document.getElementById("drawing-canvas") as HTMLCanvasElement;
 
   bigdiv.style.display='none';
   canvasapp.style.display='block';
@@ -194,7 +194,14 @@ gamestart() {
   });
 
   const startRound = () => {
-        
+
+     const ctx = c.getContext('2d');
+    if(ctx)
+    {
+      ctx.clearRect(0, 0, c.width, c.height);
+      
+    }
+
     hword.innerText='';
 
     const ROUND_DURATION = 70000; // 60 second
@@ -282,6 +289,8 @@ gameongoing()
 
   bigdiv.style.display='none';
   canvasapp.style.display='block';
+  canvasapp.style.cursor='not-allowed';
+  canvasapp.style.pointerEvents='none';
 
   const hword = document.getElementById('wordhidden') as HTMLElement;
   const roundshow = document.getElementById('round') as HTMLElement;
@@ -403,6 +412,7 @@ const thirdp=document.getElementById("thirdpoints")as HTMLElement;
 
  const wordheading=document.getElementById('wordheading') as HTMLElement;
  const wordbox=document.getElementById('wordbox') as HTMLElement;
+ const clearbtn=document.getElementById('clearbtn') as HTMLButtonElement;
 
 
  this.http.post<getrounduser>('http://localhost:3000/api/game/showrounduser', { roomId: this.roomId }).subscribe(data => {
@@ -415,10 +425,17 @@ const thirdp=document.getElementById("thirdpoints")as HTMLElement;
     hword.innerText = this.word;
     
     wordheading.innerText='Draw the word';
+    canvasapp.style.cursor='auto';
+    canvasapp.style.pointerEvents='initial';
+    clearbtn.style.display='block';
+
     }
     else
     {
       wordheading.innerText='Guess the word';
+      canvasapp.style.cursor='not-allowed';
+      canvasapp.style.pointerEvents='none';
+      clearbtn.style.display='none';
     }
   
 });
@@ -494,6 +511,9 @@ startTimer(initialTime: number) {
         clearInterval(interval);
     }
   }, 1000);
+
+
+  
 }
 
 
@@ -558,6 +578,12 @@ this.http.post('http://localhost:3000/api/game/updateroundend', { roomId: this.r
   }
 
 
+
+  // clearCanvas()
+  // {
+  //   this.canvasComponent.clearCanvas();
+
+  // }
 
 
 

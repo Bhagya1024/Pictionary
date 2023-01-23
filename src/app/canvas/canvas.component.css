@@ -8,7 +8,7 @@
 } */
 .canvas-border {
     border: 1px dashed rgb(196, 196, 196);
-    color: red !important;
+    color: black !important;
     width: 100%;
     height: 500px;
     background-color: rgb(255, 255, 255);

@@ -39,7 +39,7 @@ import { SelectRoomComponent } from './select-room/select-room.component';
     HttpClientModule,
     
   ],
-  providers: [],
+  providers: [CanvasComponent],
   bootstrap: [AppComponent]
 })
 

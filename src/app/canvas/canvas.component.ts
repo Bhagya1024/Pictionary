@@ -14,7 +14,7 @@ export class CanvasComponent {
   private isDrawing = false;
   private lastX = 0;
   private lastY = 0;
-  color = 'red';
+  color = 'black';
   items =Array.from(Array(10).keys());
   private clientID="";
   private GameID="";
@@ -115,8 +115,8 @@ export class CanvasComponent {
       this.ctx.lineWidth = 13;
       this.ctx.beginPath();  
       console.log(this.lastX+","+this.lastY);
-      this.ctx.moveTo(this.lastX-300, this.lastY);
-      this.ctx.lineTo(clientX-300, clientY);
+      this.ctx.moveTo(this.lastX-500, this.lastY-200);
+      this.ctx.lineTo(clientX-500, clientY-200);
       this.ctx.stroke();
     }
     this.lastX = clientX;
@@ -201,5 +201,14 @@ export class CanvasComponent {
     this.wsService.send(payLoad);
   }
   
+  clearCanvas() {
+    const canvas = document.getElementById('drawing-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+    if(ctx)
+    {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+  }
 
 }

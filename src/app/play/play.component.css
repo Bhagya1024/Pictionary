@@ -419,8 +419,22 @@ background-image: url('../../assets/images/second.jpeg');
 {
     margin-left: 18px;
 }
-/* #canvasapp
+.clearbtn
 {
-    cursor: not-allowed;
-    pointer-events: none;
-} */
+    width: 150px;
+    height: 40px;
+    color: rgb(254, 87, 82);
+    background-color: rgba(254, 88, 82, 0.186);
+    border-radius: 4px;
+    font-family: 'poppins-m';
+    font-size: 16px;
+    border: 1px solid rgb(254, 87, 82) ;
+    position: relative;
+    bottom: 60px;
+    left: 470px;
+    display: none;
+}
+.clearbtn i
+{
+    padding-right: 12px;
+}
