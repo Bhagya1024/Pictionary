@@ -12,7 +12,7 @@ const router = require('express').Router();
 
 
 
-//add new users
+//add new users - signup
 const adduser = (req, res, next) => {
     bcrypt.hash(req.body.password, 10, function(err, hashedpass) {
       if (err) {
