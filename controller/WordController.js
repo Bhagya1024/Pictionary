@@ -18,7 +18,7 @@ const addword= (req, res) => {
   };
 
 
-
+//not being used currently
 const getwords= async (req, res) => {
   try {
     // Get the count of words in the database
