@@ -19,7 +19,7 @@ const joinRoom = async (req, res, next) => {
     }
 }
 
-
+//join private room
 const joinprivate = async (req, res, next) => {
     try {
         const roomId = req.body.roomId;
