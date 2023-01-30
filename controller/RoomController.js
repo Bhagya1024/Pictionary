@@ -20,6 +20,22 @@ const joinRoom = async (req, res, next) => {
 }
 
 
+const joinprivate = async (req, res, next) => {
+    try {
+        const roomId = req.body.roomId;
+       
+        const room = await Room.findOne({ roomId:roomId });
+        if (!room) {
+            return res.status(404).json({ message: "Invalid Room ID" });
+            
+        } else {
+            return res.status(200).json({ message: "Room found" });
+        }
+    } catch (error) {
+        return res.status(500).json({ message: "An error occurred" });
+    }
+}
+
 
 
 //create room
@@ -34,7 +50,7 @@ const createRoom = async (req, res, next) => {
             roomId = generateRoomId();
             roomExists = await Room.findOne({ roomId });
         }
-
+       
         // Create the new room with the unique room ID
         const newRoom = new Room({ roomId, username:req.body.username,private: 1 });
         await newRoom.save();
@@ -42,7 +58,7 @@ const createRoom = async (req, res, next) => {
 
         return res.status(201).json({ message: "Room created successfully", roomId: roomId });
     } catch (error) {
-        next(error);
+        return res.status(500).json({ message: "Error creating room",error });
     }
 }
 
@@ -64,24 +80,6 @@ const subscribeToRoomChanges = (req, res) => {
 const updateUsersInRoom = (req, res) => {
     usersInRoom = req.body.usersInRoom;
     res.send({message: 'Users in room updated'});
-}
-
-
-const joinprivate = async (req, res, next) => {
-    try {
-        const roomId = req.body.roomId;
-
-        // Check if the room ID already exists
-        let room = await Room.findOne({ roomId:roomId });
-
-        if (room) {
-            return res.send({ message: "Room found" });
-        } else {
-            return res.send({ message: "Invalid Room ID" });
-        }
-    } catch (error) {
-        next(error);
-    }
 }
 
 

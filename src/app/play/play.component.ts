@@ -112,9 +112,11 @@ export class PlayComponent implements OnInit, AfterViewInit {
                 else if (msg=='Game already started'){
                   this.gameongoing();
                 }
+
                 
               }, (error) => {
              
+                console.log(error)
               });
 
               }

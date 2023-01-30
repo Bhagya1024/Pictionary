@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
+
 
 
 export class SigninComponent {
@@ -20,7 +22,16 @@ export class SigninComponent {
 constructor(private http: HttpClient, private router: Router) {}
 
 
+
+ 
+
   login() {
+    const uname = document.getElementById('username') as HTMLInputElement;
+    const pw = document.getElementById('password') as HTMLInputElement;
+
+    this.username=uname.value;
+    this.password=pw.value;
+    
     const body = {
       username: this.username,
       password: this.password

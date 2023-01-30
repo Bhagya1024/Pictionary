@@ -5,39 +5,57 @@ const UserRoom = require('../model/UserRoom')
 
 const gamestatus = async (req,res)=>{
     try {
+     
         // check if the roomId field is null
         if (!req.body.roomId) {
             return res.status(400).json({ message: "roomId cannot be null" });
         }
+
         // check if a record with the entered roomId and connected value of 1 already exists
         const existingGame = await Game.findOne({ 
             roomId: req.body.roomId,
             started: 1 
+
         });
+       
         if (existingGame) {
-            return res.json({ message: "Game already started" });
+          
+          return res.status(200).json({ message: "Game already started" });
         }
-        // Generate random 10 letter string for gameId
-        let gameId = Math.random().toString(36).slice(2, 12);
-        let words =[]
-        while(words.length<10){
-            let word = await Word.aggregate([{$sample: {size: 1}}]);
-            if(!words.includes(word[0].word))
-            words.push(word[0].word)
+        else
+        {
+         
+           // Generate random 10 letter string for gameId
+          let gameId = Math.random().toString(36).slice(2, 12);
+          
+          let words =[]
+          while(words.length<10){
+              let word = await Word.aggregate([{$sample: {size: 1}}]);
+              if(!words.includes(word[0].word))
+              words.push(word[0].word)
+          }
+         
+          // If a record does not exist, create and save a new game
+          let newGame = new Game({
+              roomId: req.body.roomId,
+              gameId: gameId,
+              words: words,
+              started: 1,
+              round:0,
+              sound:0
+          });
+    
+ 
+          await newGame.save();
+
+          // console.log(newGame);
+          return res.status(200).json({ message: "game created successfully" });
         }
-        // If a record does not exist, create and save a new game
-        let newGame = new Game({
-            roomId: req.body.roomId,
-            gameId: gameId,
-            words: words,
-            started: 1,
-            round:0,
-            sound:0
-        });
-        await newGame.save();
-        return res.status(201).json({ message: "game created successfully" });
+       
+        
         } catch (error) {
-        return res.status(500).json({ message: "An error occurred" });
+        return res.status(500).json({ error });
+        
         }
  }
 

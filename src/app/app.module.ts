@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SigninComponent } from './signin/signin/signin.component';
@@ -10,8 +9,6 @@ import { PlayComponent } from './play/play.component';
 import { RoomComponent } from './room/room.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BoardComponent } from './board/board.component';
-import { ContainerComponent } from './container/container.component';
 import { CanvasComponent } from './canvas/canvas.component';
 import { ChatComponent } from './chat/chat.component';
 import { SelectRoomComponent } from './select-room/select-room.component';
@@ -26,8 +23,6 @@ import { SelectRoomComponent } from './select-room/select-room.component';
     HomeComponent,
     PlayComponent,
     RoomComponent,
-    BoardComponent,
-    ContainerComponent,
     CanvasComponent,
     ChatComponent,
     SelectRoomComponent
@@ -37,6 +32,7 @@ import { SelectRoomComponent } from './select-room/select-room.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    
     
   ],
   providers: [CanvasComponent],

@@ -24,11 +24,16 @@ export class SignupComponent {
 
   }
 
- 
-
-
 
   search() {
+    const username=document.getElementById('username') as HTMLInputElement;
+    const password=document.getElementById('password') as HTMLInputElement;
+    const email=document.getElementById('email') as HTMLInputElement;
+
+this.username=username.value;
+this.password=password.value;
+this.email=email.value;
+
     const body = {
       username: this.username,
       password: this.password,

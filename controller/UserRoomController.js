@@ -102,18 +102,18 @@ const conuser = (req, res) => {
     user.guessed=1;
     // Save the updated user to the database
     await user.save();
-    return { message: 'Points added successfully' };
+    return res.status(200).json( { message: 'Points added successfully' });
     } else
      {
-    return { message: 'User already guessed the word' };
+        return res.status(200).json( { message: 'User already guessed the word' });
     }
     } else
      {
-    return { message: 'User not found or not connected' };
+        return res.status(404).json( { message: 'User not found or not connected' });
     }
     } catch (error) {
     console.log(error);
-    return { message: 'Error adding points' };
+    return res.status(500).json( { message: 'Error adding points' });
     }
     };
 
@@ -197,7 +197,7 @@ const showrank = async(req, res) => {
     const game = await Game.findOne({ roomId: roomId, started: 1 });
 
     if (!game) {
-        return res.json({ message: "No ongoing game in the room" });
+        return res.status(200).json({ message: "No ongoing game in the room" });
     }
 
     // Retrieve the first, second, and third place usernames

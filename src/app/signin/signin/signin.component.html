@@ -10,8 +10,8 @@
                 <p>Join us now and play pictionary with your friends</p>
         <form (submit)="login()">
                 <p id="errmsg">Invalid Username or Password</p>
-                <input type="text" name="username" placeholder="username" [(ngModel)]="username" >
-                <input type="password" name="password" placeholder="password" [(ngModel)]="password">
+                <input type="text" name="username" placeholder="username"  id="username">
+                <input type="password" name="password" placeholder="password" id="password">
                 <input type="submit" value="Sign In">
             </form>
                 <h5>Don't have an account ? <a href="/signup" >Sign Up</a></h5>

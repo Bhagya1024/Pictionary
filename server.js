@@ -7,7 +7,6 @@ const mongoose=require('mongoose')
 const morgan=require('morgan')
 const bodyParser=require('body-parser')
 
-
 const UserRoute=require('./route/UserRoute');
 const WordRoute=require('./route/WordRoute');
 const RoomRoute=require('./route/RoomRoute');
@@ -40,13 +39,13 @@ db.on('error',(err)=>{
 });
 
 db.once('open',()=>{
-    console.log('database connection estabilished');
+    // console.log('database connection estabilished');
 });
 
     const PORT=process.env.PORT || 3000
-    app.listen(PORT,()=>{
-    console.log('server is running on port ' + PORT)
-    });
+    // app.listen(PORT,()=>{
+    // console.log('server is running on port ' + PORT)
+    // });
 
 
 const wssChat = new WebSocket.Server({ server });
@@ -77,10 +76,7 @@ wssChat.on('connection', (ws, req) => {
   });
 });
 
-
-
-
-server.listen(6969, () => {
-  console.log('Server is listening on 6969');
-});
-
+module.exports = app;
+// server.listen(6969, () => {
+//   // console.log('Server is listening on 6969');
+// });

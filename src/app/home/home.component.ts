@@ -16,18 +16,18 @@ export class HomeComponent {
 
 
   constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute) {
-    this.ngOnInit();
+    
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.username = params['username'];
       console.log(this.username);
-      const uname = document.getElementById('uname') as HTMLElement;
-      uname.innerText = this.username;
+      
     });
 
-
+    const uname = document.getElementById('uname') as HTMLElement;
+    uname.innerText = this.username;
   }
 
   onJoinClick() {

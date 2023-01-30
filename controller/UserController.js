@@ -32,12 +32,12 @@ const adduser = (req, res, next) => {
       user
         .save()
         .then(response => {
-          res.json({
+          return res.status(200).json({
             message: 'user added successfully'
           });
         })
         .catch(error => {
-          res.json({
+          return res.status(500).json({
             message: 'An error occured'
           });
         });
@@ -168,24 +168,24 @@ const update=(req,res,next)=>{
 
 //delete user
 
-const destroy=(req,res,next)=>{
-    let userID=req.body.userID
-    User.findByIdAndRemove(userID)
+// const destroy=(req,res,next)=>{
+//     let userID=req.body.userID
+//     User.findByIdAndRemove(userID)
 
-    .then(response=> {
-        res.json({
-            message:'user deleted successfully'
-        })
-    })
-    .catch(error=>{
-        res.json({
-            message:'An error occured'
-        })
-    })
+//     .then(response=> {
+//         res.json({
+//             message:'user deleted successfully'
+//         })
+//     })
+//     .catch(error=>{
+//         res.json({
+//             message:'An error occured'
+//         })
+//     })
 
-}
+// }
 
 
 module.exports={
-    index,search,adduser,login,update,destroy,find
+    index,search,adduser,login,update,find
 }
