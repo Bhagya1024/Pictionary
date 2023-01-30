@@ -43,9 +43,9 @@ db.once('open',()=>{
 });
 
     const PORT=process.env.PORT || 3000
-    // app.listen(PORT,()=>{
-    // console.log('server is running on port ' + PORT)
-    // });
+    app.listen(PORT,()=>{
+    console.log('server is running on port ' + PORT)
+    });
 
 
 const wssChat = new WebSocket.Server({ server });
@@ -77,6 +77,6 @@ wssChat.on('connection', (ws, req) => {
 });
 
 module.exports = app;
-// server.listen(6969, () => {
-//   // console.log('Server is listening on 6969');
-// });
+server.listen(6969, () => {
+  // console.log('Server is listening on 6969');
+});
