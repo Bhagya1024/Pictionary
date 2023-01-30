@@ -11,7 +11,7 @@ const gamestatus = async (req,res)=>{
             return res.status(400).json({ message: "roomId cannot be null" });
         }
 
-        // check if a record with the entered roomId and connected value of 1 already exists
+        // check if a record with the entered roomId and connected value of 1 already exists or not
         const existingGame = await Game.findOne({ 
             roomId: req.body.roomId,
             started: 1 
