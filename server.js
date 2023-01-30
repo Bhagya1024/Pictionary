@@ -53,7 +53,6 @@ const wssChat = new WebSocket.Server({ server });
 
 let chatClients = [];
 
-let drawingClients = [];
 
 // Listen for incoming connections for the chat functionality
 wssChat.on('connection', (ws, req) => {
